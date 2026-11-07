@@ -3,7 +3,7 @@ import os
 
 # ---- الشخصيات ----
 # صورة الشخصيات (يونس وفريدة). تُحمّل وقت التشغيل.
-CHARACTER_IMAGE_URL = os.getenv("CHARACTER_IMAGE_URL", "https://raw.githubusercontent.com/kareem1badawy/younis-farida-daily-video/main/character.jpg")   # اختياري؛ الأفضل رفع character.jpg في المستودع
+CHARACTER_IMAGE_URL = os.getenv("CHARACTER_IMAGE_URL", "")   # اختياري؛ الأفضل رفع character.jpg في المستودع
 CHARACTER_IMAGE_BACKUP_URL = os.getenv("CHARACTER_IMAGE_BACKUP_URL", "")
 
 CHANNEL_NAME_AR = "عالم يونس وفريدة"
