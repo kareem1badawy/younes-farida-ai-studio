@@ -194,6 +194,40 @@ def completion_email_body_test():
                 os.environ[key] = value
 
 
+
+def quota_fallback_test():
+    """When remote providers are unavailable, keep output playable but label it degraded."""
+    import main
+    original_chain = main.try_chain
+    original_local = main.video_mod.local_motion_clip
+    original_order = main.config.VIDEO_ORDER
+    original_spaces = main.config.VIDEO_SPACES
+    try:
+        main.config.VIDEO_ORDER = ["hf_spaces"]
+        main.config.VIDEO_SPACES = []
+        main.try_chain = lambda *_: (None, None, ["simulated quota exhaustion"])
+        def fake_local(canvas, seconds, out, variant=0):
+            with open(out, "wb") as f:
+                f.write(b"test-video")
+            return out
+        main.video_mod.local_motion_clip = fake_local
+        main.DEGRADED_SHOTS.clear()
+        result, label, errors = main.gen_clip(
+            "canvas.jpg", "test", 2,
+            os.path.join(tempfile.gettempdir(), "quota-fallback-test.mp4"), 3, set()
+        )
+        row("quota fallback preserves episode with degraded label",
+            label == "local_motion_degraded" and 4 in main.DEGRADED_SHOTS
+            and any("manual review required" in e for e in errors))
+    except Exception as exc:
+        row("quota fallback preserves episode with degraded label", False, str(exc)[:200])
+    finally:
+        main.try_chain = original_chain
+        main.video_mod.local_motion_clip = original_local
+        main.config.VIDEO_ORDER = original_order
+        main.config.VIDEO_SPACES = original_spaces
+        main.DEGRADED_SHOTS.clear()
+
 def offline():
     work = tempfile.mkdtemp(prefix="selftest_")
     row("20-second target", config.MIN_SECONDS == 20.0 and config.MAX_SECONDS == 20.0)
@@ -205,6 +239,7 @@ def offline():
     idea_dedup_test()
     provider_notice_test()
     completion_email_body_test()
+    quota_fallback_test()
     for tool in ("ffmpeg", "ffprobe"):
         r = run([tool, "-version"], check=False); row(tool, r.returncode == 0)
     font = compose.find_arabic_font(); row("arabic font", bool(font), str(font))
