@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "date": "20261110",
+    "title": "يونس وفريدة يغسلان أيديهما",
+    "location": "home",
+    "topic": "handwashing",
+    "narration": "مرحباً يا أصدقاء! أنا يونس. وأنا فريدة! هيا نغسل أيدينا. نفتح الماء ونضع الصابون. نفرك الكفين ونعد إلى عشرين. الآن أيدينا نظيفة! إلى اللقاء يا أصدقاء!",
+    "lines": [
+      {
+        "who": "younis",
+        "text": "مرحباً يا أصدقاء! أنا يونس."
+      },
+      {
+        "who": "farida",
+        "text": "وأنا فريدة! هيا نغسل أيدينا."
+      },
+      {
+        "who": "younis",
+        "text": "نفتح الماء ونضع الصابون."
+      },
+      {
+        "who": "farida",
+        "text": "نفرك الكفين ونعد إلى عشرين."
+      },
+      {
+        "who": "younis",
+        "text": "الآن أيدينا نظيفة!"
+      },
+      {
+        "who": "farida",
+        "text": "إلى اللقاء يا أصدقاء!"
+      }
+    ],
+    "actions": [
+      "the kids enter the playroom and greet the camera",
+      "they walk to a small sink and turn on the water",
+      "Farida rubs her hands with soap bubbles",
+      "Younis shows his clean hands proudly",
+      "both wave goodbye"
+    ]
+  }
+]
