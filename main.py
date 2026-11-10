@@ -10,6 +10,7 @@ from util import log, run, try_chain, load_json, save_json, duration, has_video,
 
 SCORES = []   # درجات تشابه الألوان التشخيصية (ليست هوية وجه)
 MOTION_SCORES = []  # نشاط الحركة البصرية (لا يثبت حركة الجسم)
+DEGRADED_SHOTS = []  # لقطات احتياطية محلية؛ تُوسم الحلقة للمراجعة
 
 
 class LocationFallback(RuntimeError):
@@ -97,6 +98,11 @@ def gen_clip(canvas, prompt, seconds, out, idx, dead, audio=None):
                 except Exception as e:
                     if "identity drift" not in str(e):
                         dead.add(sp)
+                    msg = str(e).lower()
+                    if "zerogpu" in msg and ("quota" in msg or "runs limit" in msg):
+                        dead.update(config.VIDEO_SPACES)
+                        dead.update(config.SPEECH_SPACES)
+                        log("[quota guard] Hugging Face ZeroGPU quota exhausted; skipping all remaining HF Spaces")
                     raise
             cands.append((f"speech:{sp}", fn))
     for order in config.VIDEO_ORDER:
@@ -128,6 +134,11 @@ def gen_clip(canvas, prompt, seconds, out, idx, dead, audio=None):
                         except Exception as e:
                             if "identity drift" not in str(e):
                                 dead.add(sp)  # خطأ endpoint حقيقي: لا تكرر طلباً لنفس المساحة
+                            msg = str(e).lower()
+                            if "zerogpu" in msg and ("quota" in msg or "runs limit" in msg):
+                                dead.update(config.VIDEO_SPACES)
+                                dead.update(config.SPEECH_SPACES)
+                                log("[quota guard] Hugging Face ZeroGPU quota exhausted; skipping all remaining HF Spaces")
                             raise
                     cands.append((f"space:{sp}:attempt{attempt + 1}", fn2))
         elif order == "local_motion":
@@ -135,12 +146,30 @@ def gen_clip(canvas, prompt, seconds, out, idx, dead, audio=None):
                 cands.append(("local_motion", lambda: video_mod.local_motion_clip(canvas, seconds, out, variant=idx)))
             else:
                 log("[quality gate] skipped local_motion: camera-only fallback is disabled")
-    if not cands:
-        raise RuntimeError(
-            f"shot {idx + 1}: no real image-to-video provider is available. "
-            "Configure a working video provider; local camera-only motion is disabled by default."
-        )
-    return try_chain(f"video shot {idx + 1}", cands)
+    if cands:
+        result, label, errors = try_chain(f"video shot {idx + 1}", cands)
+        if result:
+            return result, label, errors
+    else:
+        result, label, errors = None, None, [
+            f"shot {idx + 1}: all remote video providers skipped or unavailable"
+        ]
+
+    # Last-resort continuity path: playable episode, but explicitly degraded.
+    # This is camera-only motion, not generated character animation.
+    try:
+        log(f"[degraded fallback] shot {idx + 1}: local still-image motion; no AI character motion is claimed")
+        fallback = video_mod.local_motion_clip(canvas, seconds, out, variant=idx)
+        if not fallback or not os.path.isfile(fallback) or not has_video(fallback):
+            raise RuntimeError("local fallback returned no valid video")
+        if duration(fallback) < 1.0:
+            raise RuntimeError("local fallback video is too short")
+        DEGRADED_SHOTS.append(idx + 1)
+        errors.append(f"shot {idx + 1}: local camera-only fallback used; manual review required")
+        return fallback, "local_motion_degraded", errors
+    except Exception as exc:
+        errors.append(f"shot {idx + 1}: local fallback failed: {type(exc).__name__}: {str(exc)[:180]}")
+        raise RuntimeError("all remote video providers and local fallback failed: " + " | ".join(errors[-5:]))
 
 
 # ------------------------------------------------------------------ اللقطات
@@ -219,6 +248,7 @@ def make_shots(ref_image, ep, shots, audio, work):
 
 # ------------------------------------------------------------------ التشغيل
 def main():
+    DEGRADED_SHOTS.clear()
     today = datetime.date.today().strftime("%Y%m%d")
     out_dir = config.OUTPUT_DIR
     os.makedirs(out_dir, exist_ok=True)
@@ -278,8 +308,10 @@ def main():
     report["consistency_scores"] = SCORES
     report["motion_diagnostics"] = MOTION_SCORES
     report["speech_shots"] = sum(1 for u in used if u.startswith("speech:"))
-    # No automatic face-identity verifier is configured. Every generated episode needs human visual review.
-    report["quality"] = "review_required"
+    report["degraded_shots"] = sorted(set(DEGRADED_SHOTS))
+    report["degraded_fallback_used"] = bool(DEGRADED_SHOTS)
+    # No automatic face-identity verifier is configured. Every episode needs human visual review.
+    report["quality"] = "degraded" if DEGRADED_SHOTS else "review_required"
 
     final = os.path.join(out_dir, f"episode_{today}.mp4")
     compose.build_final(clips, audio, timeline, work, final, durations=durs)
@@ -314,6 +346,8 @@ def main():
     if report.get("location_fallback"):
         summary.append("- **تنبيه:** تعذّر إنشاء صور الغابة؛ أُعيد إنشاء الحلقة كاملة في البيت لتجنّب خلفية غير مطابقة.")
     summary.append("- **مراجعة الجودة:** مطلوبة بصرياً؛ درجات الألوان ليست فحصاً لهوية الوجوه.")
+    if DEGRADED_SHOTS:
+        summary.append(f"- **تنبيه جودة مهم:** اللقطات {', '.join(map(str, sorted(set(DEGRADED_SHOTS))))} استخدمت تحريكاً محلياً لصورة ثابتة بعد تعذر مزودي الفيديو؛ حركة الشخصيات غير مولّدة بالذكاء الاصطناعي في هذه اللقطات. لا تنشر الحلقة قبل مراجعتها.")
     if any("FALLBACK" in k for k in key_used):
         summary.append("- **تنبيه:** صورة الغابة فشل توليدها فاستُخدمت صور غرفة اللعب بدلاً منها.")
     if config.SPEECH_ENABLED and report["speech_shots"] == 0:
