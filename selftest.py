@@ -207,8 +207,9 @@ def quota_fallback_test():
         main.config.VIDEO_SPACES = []
         main.try_chain = lambda *_: (None, None, ["simulated quota exhaustion"])
         def fake_local(canvas, seconds, out, variant=0):
-            with open(out, "wb") as f:
-                f.write(b"test-video")
+            run(["ffmpeg", "-y", "-f", "lavfi", "-i",
+                 f"color=c=blue:s=360x640:d={seconds}", "-an",
+                 "-c:v", "libx264", "-pix_fmt", "yuv420p", out])
             return out
         main.video_mod.local_motion_clip = fake_local
         main.DEGRADED_SHOTS.clear()
