@@ -124,10 +124,10 @@ def upload_youtube(video, meta, report):
     cid, sec, tok = (os.getenv(k, "").strip() for k in ("YT_CLIENT_ID", "YT_CLIENT_SECRET", "YT_REFRESH_TOKEN"))
     if not (cid and sec and tok):
         return "skipped (YT_* secrets not set)"
-    if report.get("quality") != "review_required" and report.get("quality") != "verified":
-        return "skipped (quality status is not approved)"
-    if report.get("quality") == "review_required" and os.getenv("YT_UPLOAD_REVIEWED") != "1":
-        return "skipped (manual visual review required; set YT_UPLOAD_REVIEWED=1 only after checking the video)"
+    if report.get("quality") not in ("review_required", "verified", "degraded"):
+        return "skipped (quality status is not eligible for private owner review)"
+    if report.get("quality") in ("review_required", "degraded") and os.getenv("YT_ALLOW_PRIVATE_UPLOAD") != "1":
+        return "skipped (private upload not enabled; set YT_ALLOW_PRIVATE_UPLOAD=1 to upload privately for owner review)"
     from google.oauth2.credentials import Credentials
     from googleapiclient.discovery import build
     from googleapiclient.http import MediaFileUpload

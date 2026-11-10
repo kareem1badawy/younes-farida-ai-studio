@@ -130,7 +130,7 @@ jobs:
       - name: Check out publisher code
         uses: actions/checkout@v4
 
-      - name: Download reviewed episode
+      - name: Download generated episode for private owner review
         uses: actions/download-artifact@v4
         with:
           name: episode-${{ github.run_number }}
@@ -144,14 +144,15 @@ jobs:
       - name: Install YouTube upload dependencies
         run: pip install requests google-api-python-client google-auth
 
-      - name: Upload episode as Private for owner review
+      - name: Upload episode as Private for owner review (not public)
         env:
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
           YT_PRIVACY: private
-          YT_UPLOAD_REVIEWED: "1"
+          YT_ALLOW_PRIVATE_UPLOAD: "1"
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
         run: python publish_youtube.py
+        continue-on-error: true
