@@ -38,5 +38,45 @@
       "Younis shows his clean hands proudly",
       "both wave goodbye"
     ]
+  },
+  {
+    "date": "20261111",
+    "title": "يونس وفريدة يرتبان الألعاب",
+    "location": "home",
+    "topic": "tidying",
+    "narration": "غرفتنا مليئة بالألعاب! هيا نرتبها معاً. الكرات في هذا الصندوق. والدمية على الرف. ما أجمل الغرفة المرتبة! إلى اللقاء!",
+    "lines": [
+      {
+        "who": "farida",
+        "text": "غرفتنا مليئة بالألعاب!"
+      },
+      {
+        "who": "younis",
+        "text": "هيا نرتبها معاً."
+      },
+      {
+        "who": "farida",
+        "text": "الكرات في هذا الصندوق."
+      },
+      {
+        "who": "younis",
+        "text": "والدمية على الرف."
+      },
+      {
+        "who": "farida",
+        "text": "ما أجمل الغرفة المرتبة!"
+      },
+      {
+        "who": "younis",
+        "text": "إلى اللقاء!"
+      }
+    ],
+    "actions": [
+      "the kids look around a toy-filled playroom",
+      "they pick up toys and carry them",
+      "Farida puts balls into a box",
+      "Younis places a teddy bear on a shelf",
+      "both admire the tidy room and wave"
+    ]
   }
 ]
