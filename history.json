@@ -78,5 +78,45 @@
       "Younis places a teddy bear on a shelf",
       "both admire the tidy room and wave"
     ]
+  },
+  {
+    "date": "20261112",
+    "title": "يونس وفريدة يتعلمان المشاركة",
+    "location": "home",
+    "topic": "sharing",
+    "narration": "أريد هذه الكرة الجميلة. يمكننا اللعب بها معاً. سأدحرجها إليك. والآن أعيدها إليك! اللعب معاً ممتع. المشاركة تجعلنا سعداء!",
+    "lines": [
+      {
+        "who": "younis",
+        "text": "أريد هذه الكرة الجميلة."
+      },
+      {
+        "who": "farida",
+        "text": "يمكننا اللعب بها معاً."
+      },
+      {
+        "who": "younis",
+        "text": "سأدحرجها إليك."
+      },
+      {
+        "who": "farida",
+        "text": "والآن أعيدها إليك!"
+      },
+      {
+        "who": "younis",
+        "text": "اللعب معاً ممتع."
+      },
+      {
+        "who": "farida",
+        "text": "المشاركة تجعلنا سعداء!"
+      }
+    ],
+    "actions": [
+      "Younis picks up a colorful ball",
+      "Farida asks to join and smiles",
+      "Younis rolls the ball to Farida",
+      "Farida rolls it back",
+      "both celebrate their game"
+    ]
   }
 ]
