@@ -118,5 +118,45 @@
       "Farida rolls it back",
       "both celebrate their game"
     ]
+  },
+  {
+    "date": "20261113",
+    "title": "يونس وفريدة يبحثان عن الأشكال",
+    "location": "home",
+    "topic": "shapes",
+    "narration": "هذه نافذة مربعة! والساعة دائرية. انظر إلى المكعب، له أوجه مربعة. وجدت لعبة مثلثية! الأشكال حولنا في كل مكان. إلى اللقاء!",
+    "lines": [
+      {
+        "who": "farida",
+        "text": "هذه نافذة مربعة!"
+      },
+      {
+        "who": "younis",
+        "text": "والساعة دائرية."
+      },
+      {
+        "who": "farida",
+        "text": "انظر إلى المكعب، له أوجه مربعة."
+      },
+      {
+        "who": "younis",
+        "text": "وجدت لعبة مثلثية!"
+      },
+      {
+        "who": "farida",
+        "text": "الأشكال حولنا في كل مكان."
+      },
+      {
+        "who": "younis",
+        "text": "إلى اللقاء!"
+      }
+    ],
+    "actions": [
+      "Farida points to a square window",
+      "Younis shows a round toy clock",
+      "they turn a wooden cube together",
+      "Younis finds a triangle block",
+      "both compare the shapes and wave"
+    ]
   }
 ]
