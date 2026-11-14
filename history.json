@@ -158,5 +158,45 @@
       "Younis finds a triangle block",
       "both compare the shapes and wave"
     ]
+  },
+  {
+    "date": "20261114",
+    "title": "يونس وفريدة يزرعان بذرة",
+    "location": "home",
+    "topic": "planting",
+    "narration": "ماذا سنزرع اليوم؟ هذه بذرة صغيرة. نضعها في التراب برفق. ثم نسقيها قليلاً. سنعتني بها كل يوم. حتى تكبر وتصبح نبتة!",
+    "lines": [
+      {
+        "who": "younis",
+        "text": "ماذا سنزرع اليوم؟"
+      },
+      {
+        "who": "farida",
+        "text": "هذه بذرة صغيرة."
+      },
+      {
+        "who": "younis",
+        "text": "نضعها في التراب برفق."
+      },
+      {
+        "who": "farida",
+        "text": "ثم نسقيها قليلاً."
+      },
+      {
+        "who": "younis",
+        "text": "سنعتني بها كل يوم."
+      },
+      {
+        "who": "farida",
+        "text": "حتى تكبر وتصبح نبتة!"
+      }
+    ],
+    "actions": [
+      "the kids examine a large seed packet",
+      "Farida makes a small hole in a pot of soil",
+      "Younis places a seed gently",
+      "they water the soil together",
+      "both imagine the plant growing"
+    ]
   }
 ]
