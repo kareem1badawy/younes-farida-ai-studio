@@ -120,7 +120,7 @@ jobs:
 
   youtube_upload:
     needs: build
-    # Upload automatically after a successful episode build; publisher enforces Private visibility.
+    # Upload has its own job: a YouTube failure is visible but cannot cancel a completed video build.
     if: ${{ needs.build.result == 'success' && (github.event.inputs.mode == '' || github.event.inputs.mode == 'run') }}
     runs-on: ubuntu-latest
     permissions:
@@ -144,6 +144,9 @@ jobs:
       - name: Install YouTube upload dependencies
         run: pip install requests google-api-python-client google-auth
 
+      - name: Validate publisher syntax
+        run: python -m py_compile publish_youtube.py deliver.py
+
       - name: Upload episode as Private for owner review (not public)
         env:
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
@@ -155,4 +158,12 @@ jobs:
           EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
         run: python publish_youtube.py
-        continue-on-error: true
+
+      - name: Save YouTube upload result
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-upload-status-${{ github.run_number }}
+          path: output/youtube_upload_status.json
+          retention-days: 14
+          if-no-files-found: warn
