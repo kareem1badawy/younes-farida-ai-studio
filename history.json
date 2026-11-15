@@ -198,5 +198,45 @@
       "they water the soil together",
       "both imagine the plant growing"
     ]
+  },
+  {
+    "date": "20261115",
+    "title": "يونس وفريدة يصنعان فرقة موسيقية",
+    "location": "home",
+    "topic": "music",
+    "narration": "هيا نصنع موسيقى يا يونس! سأستخدم الطبلة الصغيرة. وأنا سأهز الجرس. واحد، اثنان، ثلاثة! كم إيقاعنا جميل! صفقوا معنا!",
+    "lines": [
+      {
+        "who": "farida",
+        "text": "هيا نصنع موسيقى يا يونس!"
+      },
+      {
+        "who": "younis",
+        "text": "سأستخدم الطبلة الصغيرة."
+      },
+      {
+        "who": "farida",
+        "text": "وأنا سأهز الجرس."
+      },
+      {
+        "who": "younis",
+        "text": "واحد، اثنان، ثلاثة!"
+      },
+      {
+        "who": "farida",
+        "text": "كم إيقاعنا جميل!"
+      },
+      {
+        "who": "younis",
+        "text": "صفقوا معنا!"
+      }
+    ],
+    "actions": [
+      "the kids choose safe toy instruments",
+      "Younis taps a small toy drum",
+      "Farida shakes a hand bell",
+      "they play a simple rhythm together",
+      "both clap and dance in place"
+    ]
   }
 ]
