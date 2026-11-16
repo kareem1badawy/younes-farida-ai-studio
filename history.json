@@ -238,5 +238,45 @@
       "they play a simple rhythm together",
       "both clap and dance in place"
     ]
+  },
+  {
+    "date": "20261116",
+    "title": "يونس وفريدة يحضّران سلطة الفواكه",
+    "location": "home",
+    "topic": "baking",
+    "narration": "ما رأيكِ أن نحضر وجبة ملونة؟ نغسل الفواكه أولاً. أضع قطع التفاح هنا. وأضيف الموز والعنب. ألوانها جميلة ومفيدة. نتناولها مع العائلة!",
+    "lines": [
+      {
+        "who": "younis",
+        "text": "ما رأيكِ أن نحضر وجبة ملونة؟"
+      },
+      {
+        "who": "farida",
+        "text": "نغسل الفواكه أولاً."
+      },
+      {
+        "who": "younis",
+        "text": "أضع قطع التفاح هنا."
+      },
+      {
+        "who": "farida",
+        "text": "وأضيف الموز والعنب."
+      },
+      {
+        "who": "younis",
+        "text": "ألوانها جميلة ومفيدة."
+      },
+      {
+        "who": "farida",
+        "text": "نتناولها مع العائلة!"
+      }
+    ],
+    "actions": [
+      "the kids stand at a safe low kitchen counter with an adult nearby",
+      "they rinse fruit in a bowl",
+      "Younis places prepared apple pieces in a bowl",
+      "Farida adds banana and grapes",
+      "they admire the colorful fruit salad"
+    ]
   }
 ]
