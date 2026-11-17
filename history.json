@@ -278,5 +278,45 @@
       "Farida adds banana and grapes",
       "they admire the colorful fruit salad"
     ]
+  },
+  {
+    "date": "20261117",
+    "title": "يونس وفريدة يحلان لغز الصور",
+    "location": "home",
+    "topic": "puzzles",
+    "narration": "أين تذهب هذه القطعة؟ جرّبي وضعها بجانب الزرقة. وجدت مكانها الصحيح! بقيت قطعة واحدة. معاً نستطيع حل اللغز. نجحنا!",
+    "lines": [
+      {
+        "who": "farida",
+        "text": "أين تذهب هذه القطعة؟"
+      },
+      {
+        "who": "younis",
+        "text": "جرّبي وضعها بجانب الزرقة."
+      },
+      {
+        "who": "farida",
+        "text": "وجدت مكانها الصحيح!"
+      },
+      {
+        "who": "younis",
+        "text": "بقيت قطعة واحدة."
+      },
+      {
+        "who": "farida",
+        "text": "معاً نستطيع حل اللغز."
+      },
+      {
+        "who": "younis",
+        "text": "نجحنا!"
+      }
+    ],
+    "actions": [
+      "the kids sit together with a large child-safe picture puzzle",
+      "Younis points to a matching blue edge",
+      "Farida fits a puzzle piece",
+      "they search for the final piece",
+      "they place it together and celebrate"
+    ]
   }
 ]
