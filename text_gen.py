@@ -59,6 +59,7 @@ def _idea(location, topic, title, dialogue, actions):
             "lines": [D(x) for x in dialogue], "actions": actions}
 
 FALLBACK_BANK = [
+    # RULE: every idea here must be a NEW episode — check the channel's videos and the main repo's history before adding one. Actions must stay inside the rendered location (home = playroom: no bathroom/kitchen scenes).
     _idea("home", "handwashing", "يونس وفريدة يغسلان أيديهما",
           [("younis", "مرحباً يا أصدقاء! أنا يونس."), ("farida", "وأنا فريدة! هيا نغسل أيدينا."),
            ("younis", "نفتح الماء ونضع الصابون."), ("farida", "نفرك الكفين ونعد إلى عشرين."),
@@ -160,10 +161,10 @@ FALLBACK_BANK = [
            ("younis", "نجحنا! برجنا جميل."), ("farida", "إلى اللقاء يا أصدقاء!")],
           ["the kids sit on the floor with colorful building blocks", "Farida places a red block", "Younis stacks a blue block on top", "they build a tall tower together", "both admire the tower and wave"]),
     _idea("home", "helping", "يونس وفريدة يساعدان أمهما",
-          [("farida", "أمي تطبخ، هيا نساعدها."), ("younis", "أحمل الصحون بهدوء."),
-           ("farida", "وأنا أمسح الطاولة."), ("younis", "أمي سعيدة بنا!"),
+          [("farida", "أمي تطوي الغسيل، هيا نساعدها."), ("younis", "أطوي المنشفة بهدوء."),
+           ("farida", "وأنا أرتب الجوارب."), ("younis", "أمي سعيدة بنا!"),
            ("farida", "مساعدة أمي جميلة."), ("younis", "إلى اللقاء!")],
-          ["the kids walk into the kitchen where their mother cooks", "Younis carries plates carefully", "Farida wipes the table with a cloth", "their mother smiles and thanks them", "both wave goodbye"]),
+          ["their mother folds laundry in the living room", "Younis folds a towel neatly", "Farida stacks socks in a small pile", "their mother smiles and thanks them", "both wave goodbye"]),
     _idea("home", "dressing", "يونس وفريدة يرتديان ملابسهما",
           [("younis", "صباح الخير! نلبس ملابسنا."), ("farida", "قميصي البنفسجي جميل."),
            ("younis", "وأنا أحب قميصي الأصفر."), ("farida", "نلبس الحذاء وحدنا!"),
