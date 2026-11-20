@@ -318,5 +318,45 @@
       "they search for the final piece",
       "they place it together and celebrate"
     ]
+  },
+  {
+    "date": "20261120",
+    "title": "يونس وفريدة يفرشان أسنانهما",
+    "location": "home",
+    "topic": "brushing_teeth",
+    "narration": "حان وقت تنظيف أسناننا! هذه فرشاتي الوردية. أضع المعجون وأفرش بهدوء. نفرش فوق وتحت ونعد للعشرة. أسناننا نظيفة ولامعة! نفرش أسناننا كل يوم!",
+    "lines": [
+      {
+        "who": "younis",
+        "text": "حان وقت تنظيف أسناننا!"
+      },
+      {
+        "who": "farida",
+        "text": "هذه فرشاتي الوردية."
+      },
+      {
+        "who": "younis",
+        "text": "أضع المعجون وأفرش بهدوء."
+      },
+      {
+        "who": "farida",
+        "text": "نفرش فوق وتحت ونعد للعشرة."
+      },
+      {
+        "who": "younis",
+        "text": "أسناننا نظيفة ولامعة!"
+      },
+      {
+        "who": "farida",
+        "text": "نفرش أسناننا كل يوم!"
+      }
+    ],
+    "actions": [
+      "the kids stand at a small bathroom sink with toothbrushes",
+      "Farida shows her pink toothbrush",
+      "Younis squeezes toothpaste onto his brush",
+      "they brush their teeth together and count",
+      "both smile showing clean teeth and wave"
+    ]
   }
 ]
